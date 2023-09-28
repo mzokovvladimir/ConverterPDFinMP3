@@ -5,12 +5,12 @@ import pdfplumber
 from pathlib import Path
 
 
-def pdf_to_mp3(file_path='test.pdf', language='en'):
+def pdf_to_mp3(file_path:str='test.pdf', language:str='en') -> str:
     if Path(file_path).is_file() and Path(file_path).suffix == '.pdf':
         print(f'[+] Original file: {Path(file_path).name}')
         print(f'[+] Processing...')
 
-        with pdfplumber.PDF(open(file=file_path, mode='rb')) as pdf:
+        with pdfplumber.PDF(open(file:str=file_path, mode:str='rb')) as pdf:
             pages = [page.extract_text() for page in pdf.pages]
 
         text = ''.join(pages).replace('\n', ' ')
@@ -25,7 +25,7 @@ def pdf_to_mp3(file_path='test.pdf', language='en'):
         return 'File not exists, check the file path!'
 
 
-def main():
+def main() -> None:
     tprint('PDF>>TO>>MP3', font='bulkhead')
     file_path = input("\nEnter a file's path: ")
     language = input("Choose language, for example 'en' or 'ru': ")
